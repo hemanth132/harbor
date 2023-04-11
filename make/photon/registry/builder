@@ -22,15 +22,12 @@ cur=$PWD
 TEMP=`mktemp -d ${TMPDIR-/tmp}/distribution.XXXXXX`
 git clone -b $VERSION https://github.com/distribution/distribution.git $TEMP
 
-# add patch 2815
-echo 'add patch https://github.com/distribution/distribution/pull/2815 ...'
+# add patch 2
+echo 'add patch https://github.com/hemanth132/distribution/pull/2 ...'
 cd $TEMP
-wget https://github.com/distribution/distribution/pull/2815.patch
-git apply 2815.patch
+wget https://github.com/hemanth132/distribution/pull/2.patch
+git apply 2.patch
 
-# add patch redis
-cd $TEMP
-git apply $cur/redis.patch
 cd $cur
 
 echo 'build the registry binary ...'
