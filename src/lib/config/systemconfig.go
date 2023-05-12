@@ -142,6 +142,17 @@ func GetGCTimeWindow() int64 {
 	return common.DefaultGCTimeWindowHours
 }
 
+// GetGCDefaultConcurrency returns the concurrency of deleting images within a gc run
+func GetGCDefaultConcurrency() int64 {
+	if env, exist := os.LookupEnv("GC_DELETE_CONCURRENCY"); exist {
+		concurrency, err := strconv.ParseInt(env, 10, 64)
+		if err == nil {
+			return concurrency
+		}
+	}
+	return common.DefaultGcDeleteConcurrency
+}
+
 // WithNotary returns a bool value to indicate if Harbor's deployed with Notary
 func WithNotary() bool {
 	return DefaultMgr().Get(backgroundCtx, common.WithNotary).GetBool()
